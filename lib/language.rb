@@ -3,7 +3,7 @@ require 'rack/accept'
 
 require 'language/language_drop'
 
-module Language
+module LanguagePlugin
   class Language
 
     include Locomotive::Plugin

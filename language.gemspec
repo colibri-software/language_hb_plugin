@@ -6,7 +6,7 @@ require 'language/version'
 
 Gem::Specification.new do |s|
   s.name = "language"
-  s.version = Language::VERSION
+  s.version = LanguagePlugin::VERSION
   s.platform    = Gem::Platform::RUBY
 
   s.authors     = ["Colibri Software"]
