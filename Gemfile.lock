@@ -1,0 +1,29 @@
+PATH
+  remote: .
+  specs:
+    language (0.0.1)
+      iso-639
+      locomotive_plugins (~> 0.0.1)
+      rack-accept
+
+PATH
+  remote: /home/alex/colibri/locomotive_plugins
+  specs:
+    locomotive_plugins (0.0.1)
+      locomotive_liquid (~> 2.2.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    iso-639 (0.0.3)
+    locomotive_liquid (2.2.2)
+    rack (1.4.1)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  language!
+  locomotive_plugins (~> 0.0.1)!
