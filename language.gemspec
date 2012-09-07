@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.summary     = "Locomotive plugin for detecting language"
   s.description = "This plugin detects the current language which the user accepts"
 
-  s.add_dependency 'locomotive_plugins',    '~> 0.0.1'
+  s.add_dependency 'locomotive_plugins',    '~> 0.1'
   s.add_dependency 'rack-accept'
   s.add_dependency 'iso-639'
 
