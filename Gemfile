@@ -2,5 +2,4 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'locomotive_plugins', '~> 0.1',
-  :path => '/home/alex/colibri/locomotive_plugins'
+gem 'locomotive_plugins', '~> 1.0.0.beta9'
