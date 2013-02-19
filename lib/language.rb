@@ -38,7 +38,4 @@ module LanguagePlugin
     end
 
   end
-
-  LocomotivePlugins.register_plugin(Language)
-
 end
