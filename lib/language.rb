@@ -16,9 +16,9 @@ module LanguagePlugin
       @accept_language = Rack::Accept::Language.new(self.controller.request.env['HTTP_ACCEPT_LANGUAGE'])
     end
 
-    before_filter :reset_accept_language
+    before_page_render :reset_accept_language
 
-    before_filter :set_locale
+    before_page_render :set_locale
 
     def reset_accept_language
       @accept_language = nil
