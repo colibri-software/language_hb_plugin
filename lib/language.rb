@@ -1,4 +1,5 @@
 
+require 'locomotive_plugins'
 require 'rack/accept'
 
 require 'language/language_drop'
@@ -37,5 +38,39 @@ module LanguagePlugin
       LanguageDrop.new(self)
     end
 
+  end
+end
+
+module Locomotive
+  module Liquid
+    module Tags
+      class LocaleSwitcher
+        def render(context)
+          @site, @page = context.registers[:site], context.registers[:page]
+
+          output = %(<div id="locale-switcher">)
+
+          output += @site.locales.collect do |locale|
+            ::Mongoid::Fields::I18n.with_locale(locale) do
+              fullpath = @site.localized_page_fullpath(@page, locale)
+
+              if locale == @site.default_locale
+                fullpath = "#{locale}/#{fullpath}"
+              end
+
+              if @page.templatized?
+                fullpath.gsub!('content_type_template', context['entry']._permalink)
+              end
+
+              css = link_class(locale, context['locale'])
+
+              %(<a href="/#{fullpath}" class="#{css}">#{link_label(locale)}</a>)
+            end
+          end.join(@options[:sep])
+
+          output += %(</div>)
+        end
+      end
+    end
   end
 end
