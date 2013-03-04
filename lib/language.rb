@@ -11,10 +11,35 @@ module LanguagePlugin
 
     attr_reader :accept_language
 
+    def self.plugin_loaded
+      Locomotive::Extensions::Site::Locales.class_eval do
+        def default_locale
+          language_object = nil
+          enabled_plugin_objects_by_id.each do |id,object|
+            if object.class == Language
+              language_object = object
+              break
+            end
+          end
+          locale = language_object.try(:default_locale)
+          if locale && self.locales.include?(locale)
+            locale
+          else
+            self.locales.first || Locomotive.config.site_locales.first
+          end
+        end
+      end
+    end
+
     def accept_language
       return @accept_language if @accept_language
-
+      return nil unless self.controller
       @accept_language = Rack::Accept::Language.new(self.controller.request.env['HTTP_ACCEPT_LANGUAGE'])
+    end
+
+    def default_locale
+      lang = accept_language
+      locale = lang.sort(lang.values).first[0..1] if lang
     end
 
     before_page_render :reset_accept_language
@@ -26,51 +51,12 @@ module LanguagePlugin
     end
 
     def set_locale
-      locale = accept_language.sort(accept_language.values).first[0..1]
-      if !self.controller.params[:locale] \
-        && self.controller.send(:current_site).locales.include?(locale)
-        self.controller.params[:locale] = locale
-        self.controller.send(:set_locale)
-      end
+      self.controller.send(:set_locale)
     end
 
     def to_liquid
       LanguageDrop.new(self)
     end
 
-  end
-end
-
-module Locomotive
-  module Liquid
-    module Tags
-      class LocaleSwitcher
-        def render(context)
-          @site, @page = context.registers[:site], context.registers[:page]
-
-          output = %(<div id="locale-switcher">)
-
-          output += @site.locales.collect do |locale|
-            ::Mongoid::Fields::I18n.with_locale(locale) do
-              fullpath = @site.localized_page_fullpath(@page, locale)
-
-              if locale == @site.default_locale
-                fullpath = "#{locale}/#{fullpath}"
-              end
-
-              if @page.templatized?
-                fullpath.gsub!('content_type_template', context['entry']._permalink)
-              end
-
-              css = link_class(locale, context['locale'])
-
-              %(<a href="/#{fullpath}" class="#{css}">#{link_label(locale)}</a>)
-            end
-          end.join(@options[:sep])
-
-          output += %(</div>)
-        end
-      end
-    end
   end
 end
