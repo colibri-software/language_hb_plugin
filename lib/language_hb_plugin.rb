@@ -2,9 +2,9 @@
 require 'locomotive_plugins'
 require 'rack/accept'
 
-require 'language/language_drop'
+require 'language_hb_plugin/language_drop'
 
-module LanguagePlugin
+module LanguageHBPlugin
   class Language
 
     include Locomotive::Plugin

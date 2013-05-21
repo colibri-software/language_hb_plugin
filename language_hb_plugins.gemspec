@@ -2,11 +2,11 @@
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
-require 'language/version'
+require 'language_hb_plugin/version'
 
 Gem::Specification.new do |s|
-  s.name = "language"
-  s.version = LanguagePlugin::VERSION
+  s.name = "language_hb_plugin"
+  s.version = LanguageHBPlugin::VERSION
   s.platform    = Gem::Platform::RUBY
 
   s.authors     = ["Colibri Software"]
