@@ -1,5 +1,5 @@
 
-module LanguageHBPlugin
+module LanguageHbPlugin
   class LanguageDrop < ::Liquid::Drop
 
     # TODO: make this forbidden

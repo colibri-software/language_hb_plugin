@@ -4,7 +4,7 @@ require 'rack/accept'
 
 require 'language_hb_plugin/language_drop'
 
-module LanguageHBPlugin
+module LanguageHbPlugin
   class Language
 
     include Locomotive::Plugin

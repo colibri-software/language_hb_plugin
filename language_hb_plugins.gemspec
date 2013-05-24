@@ -6,7 +6,7 @@ require 'language_hb_plugin/version'
 
 Gem::Specification.new do |s|
   s.name = "language_hb_plugin"
-  s.version = LanguageHBPlugin::VERSION
+  s.version = LanguageHbPlugin::VERSION
   s.platform    = Gem::Platform::RUBY
 
   s.authors     = ["Colibri Software"]
